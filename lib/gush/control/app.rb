@@ -20,7 +20,9 @@ module Gush
       end
 
       get "/" do
-        @workflows = settings.client.all_workflows
+        @page, per_page = params[:page] ? params[:page].to_i : 1, 10
+        @pages = (settings.client.all_workflows_size / per_page.to_f).ceil
+        @workflows = settings.client.all_workflows(per_page, (@page - 1) * per_page)
         slim :index
       end
 

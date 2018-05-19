@@ -17,6 +17,14 @@
       tbody
         tr
           td.text-center colspan=4 Loading…
+
+    .right
+      - if @page > 1
+        a href="/?page=#{@page - 1}" Previous
+      | &nbsp;
+      - if @page < @pages
+        a href="/?page=#{@page + 1}" Next
+
     h1 Registered machines
 
     table.machines
@@ -26,4 +34,3 @@
         th Enqueued jobs
         th Status
       tbody
-
