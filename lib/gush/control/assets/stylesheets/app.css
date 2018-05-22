@@ -14,39 +14,36 @@ text {
 
 .node rect {
   stroke-width: 1.5px;
-  stroke: #333;
-  fill: #fff;
 }
 
-.node.start rect {
+.node.status-none rect {
   fill: #f77;
-}
-
-.node.failed rect {
   stroke: #f77;
 }
 
-.node.end rect {
-  fill: #7f7;
-}
-
-.node.status-finished.status-failed rect {
+.node.status-failed rect {
   stroke: red;
   fill: red;
 }
 
-.node.status-finished.status-failed text {
-  fill: white;
+.node.status-skipped rect {
+  stroke: pink;
+  fill: pink;
 }
 
 .node.status-finished rect {
-  stroke: #7f7;
-  fill: #7f7;
+  stroke: green;
+  fill: green;
 }
 
 .node.status-enqueued rect {
   stroke: lightblue;
   fill: lightblue;
+}
+
+.node.status-running rect {
+  stroke: lightgreen;
+  fill: lightgreen;
 }
 
 .edgeLabel rect {
@@ -71,4 +68,24 @@ ul.logs li{
   color: wheat;
   font-family: monospace;
   white-space: pre-wrap;
+}
+
+.job-label.failed {
+  background-color: red;
+}
+
+.job-label.skipped {
+  background-color: pink;
+}
+
+.job-label.finished {
+  background-color: green;
+}
+
+.job-label.enqueued {
+  background-color: lightblue;
+}
+
+.job-label.running {
+  background-color: lightgreen;
 }
