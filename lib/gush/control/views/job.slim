@@ -1,17 +1,8 @@
 .row
   .large-8.columns
     h1
-      - case
-      - when @job.failed?
-        span.label.alert Failed
-      - when @job.finished?
-        span.label.success Finished
-      - when @job.running?
-        span.label Running
-      - when @job.enqueued?
-        span.label.secondary Enqueued
-      - else
-        span.label.secondary Pending
+      span.label class=@job.status.downcase
+        = @job.status
       = @job.name
       '
       small = @workflow.id

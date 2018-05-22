@@ -6,10 +6,7 @@ class @Graph
   populate: (nodes, links) ->
     nodes.forEach (node) =>
       @digraph.addNode node.name,
-        finished: node.finished,
-        failed: node.failed,
-        running: node.running,
-        enqueued: node.enqueued
+        status: (node.status || 'None').toLowerCase()
         label: node.klass
 
     links.forEach (edge) =>
@@ -28,14 +25,7 @@ class @Graph
       svgNodes.attr "class", (name) =>
         node = @digraph.node(name)
         classes = "node " + name.replace(/::/g, '_').toLowerCase()
-        if node.failed
-          classes += " status-failed";
-        else if node.finished
-          classes += " status-finished";
-        else if node.running
-          classes += " status-running";
-        else if node.enqueued
-          classes += " status-enqueued"
+        classes += " status-#{node.status}";
         classes;
 
       svgNodes;

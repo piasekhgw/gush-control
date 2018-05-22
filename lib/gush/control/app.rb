@@ -28,7 +28,7 @@ module Gush
 
       get "/jobs/:workflow_id.:job" do |workflow_id, job|
         @workflow = settings.client.find_workflow(workflow_id)
-        @job = @workflow.find_job(job)
+        @job = Gush::Control::Job.new(@workflow.find_job(job))
         slim :job
       end
 
@@ -99,16 +99,17 @@ module Gush
         @jobs << {name: "End", klass: "End"}
 
 
-        @workflow.jobs.each do |job|
+        @workflow.jobs.map { |j| Gush::Control::Job.new(j) }.each do |job|
           @jobs << {
             name:         job.name,
-            klass:        job.class.to_s,
+            klass:        job.klass,
             finished:     job.finished?,
             started_at:   format_time(job.started_at),
             finished_at:  format_time(job.finished_at),
             running:      job.running?,
             enqueued:     job.enqueued?,
-            failed:       job.failed?
+            failed:       job.failed?,
+            status:       job.status
           }
 
           if job.incoming.empty?
