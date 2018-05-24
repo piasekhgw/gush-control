@@ -46,6 +46,11 @@ text {
   fill: lightgreen;
 }
 
+.node.status-pending rect {
+  stroke: black;
+  fill: white;
+}
+
 .edgeLabel rect {
   fill: #fff;
 }
