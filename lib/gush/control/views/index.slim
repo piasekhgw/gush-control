@@ -7,6 +7,7 @@
     table.workflows data-workflows=@workflows.to_json
       thead
         th ID
+        th Args
         th Name
         th Progress
         th Status
@@ -20,10 +21,10 @@
 
     .right
       - if @page > 1
-        a href="/?page=#{@page - 1}" Previous
+        a href="#{app_prefix}/?page=#{@page - 1}" Previous
       | &nbsp;
       - if @page < @pages
-        a href="/?page=#{@page + 1}" Next
+        a href="#{app_prefix}/?page=#{@page + 1}" Next
 
     h1 Registered machines
 
