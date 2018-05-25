@@ -2,10 +2,8 @@ class @Gush
   constructor: ->
     @workflows = {}
     @machines = {}
-    @appPrefix = $('body').data('app-prefix')
 
   initialize: (jobs) ->
-    @registerSockets()
     @displayCurrentWorkflows()
     @displayJobsOverview(jobs)
 
@@ -41,7 +39,7 @@ class @Gush
       @refreshJobList()
 
   registerWorkersSocket: ->
-    workersSocket = new WebSocket(@_socketUrl("#{@appPrefix}/subscribe/workers.status"))
+    workersSocket = new WebSocket(@_socketUrl("subscribe/workers.status"))
 
     workersSocket.onopen    = @_onOpen
     workersSocket.onerror   = @_onError
@@ -49,7 +47,7 @@ class @Gush
     workersSocket.onclose   = @_onClose
 
   registerWorkflowsSocket: ->
-    workflowsSocket = new WebSocket(@_socketUrl("#{@appPrefix}/workflows.status"))
+    workflowsSocket = new WebSocket(@_socketUrl("workflows.status"))
 
     workflowsSocket.onopen    = @_onOpen
     workflowsSocket.onerror   = @_onError
@@ -57,7 +55,7 @@ class @Gush
     workflowsSocket.onclose   = @_onClose
 
   registerMachinesSocket: ->
-    machinesSocket = new WebSocket(@_socketUrl("#{@appPrefix}/workers"))
+    machinesSocket = new WebSocket(@_socketUrl("workers"))
 
     machinesSocket.onopen    = @_onOpen
     machinesSocket.onerror   = @_onError
@@ -66,7 +64,7 @@ class @Gush
     machinesSocket.onclose   = @_onClose
 
   registerLogsSocket: (workflow, job) =>
-    logsSocket = new WebSocket(@_socketUrl("#{@appPrefix}/logs/#{workflow}.#{job}"))
+    logsSocket = new WebSocket(@_socketUrl("logs/#{workflow}.#{job}"))
 
     @_registerScrollHook(logsSocket)
 
